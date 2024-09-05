@@ -1,82 +1,102 @@
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Set background and overall styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: black;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh; /* Ensures it's centered in full view height */
-    padding: 0 15px;
-    margin: 0;
+    align-items: flex-start;  /* Поднимаем блок ближе к верху */
+    height: 100vh;
+    background: linear-gradient(135deg, #1c1f26, #3b3f51);
+    color: #f0f0f0;
+    padding-top: 20px; /* Отступ сверху */
 }
 
-/* Style the calculator container */
 .calculator-container {
-    background-color: #1e1e1e;
+    background: #292d3e;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
     width: 100%;
-    color: #fff;
-    text-align: center;
-    margin-top: -50px; /* Adjust this to move the block up */
+    max-width: 450px;
 }
 
-/* Heading styles */
 h2 {
-    font-size: 24px;
+    text-align: center;
+    color: #ffcc00;
+    font-size: 1.8rem;
     margin-bottom: 20px;
 }
 
-/* Block styling for each section */
 .currency-block {
-    margin-bottom: 20px;
-    text-align: left;
+    margin-bottom: 15px;
 }
 
-/* Label styling */
 .currency-block h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ffcc00;
 }
 
-/* Input field styling */
-input[type="number"], input[readonly] {
+select, input[type="number"], input[type="text"] {
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
-    border: none;
+    font-size: 1.1rem;
+    border: 2px solid #3b3f51;
+    border-radius: 8px;
+    background-color: #1c1f26;
+    color: #f0f0f0;
     outline: none;
-    background-color: #333;
-    color: #fff;
-    font-size: 16px;
+    transition: 0.3s;
 }
 
-/* Select dropdown styling */
+select:focus, input[type="number"]:focus, input[type="text"]:focus {
+    border-color: #ffcc00;
+}
+
 select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background-color: #333;
-    color: #fff;
-    font-size: 16px;
+    appearance: none; /* Убираем стандартный стиль селекта */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 5'%3E%3Cpath fill='%23fff' d='M0 0h10L5 5z'/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
 }
 
-/* Exchange rate and output styling */
+input[type="number"], input[type="text"] {
+    padding-left: 15px;
+}
+
+input[type="text"] {
+    background-color: #3b3f51;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
 #exchangeRate, #thbRate {
-    font-size: 14px;
-    color: #ccc;
-    margin-top: 10px;
+    text-align: center;
+    font-size: 1rem;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    color: #f0f0f0;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #e6b800;
 }
 
 /* Responsive behavior */
