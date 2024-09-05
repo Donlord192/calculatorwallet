@@ -1,116 +1,96 @@
+/* Reset some default styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Set background and overall styling */
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #0f0f0f;
-    color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh; /* Ensures it's centered in full view height */
+    padding: 0 15px;
     margin: 0;
 }
 
+/* Style the calculator container */
 .calculator-container {
-    background: #1b1b1b;
-    border-radius: 20px;
+    background-color: #1e1e1e;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     max-width: 400px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    margin-top: -50px; /* Adjust this to move the block up */
 }
 
+/* Heading styles */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Block styling for each section */
 .currency-block {
     margin-bottom: 20px;
-    position: relative;
+    text-align: left;
 }
 
+/* Label styling */
 .currency-block h3 {
     font-size: 16px;
-    color: #f2f2f2;
-    margin-bottom: 8px;
-    font-weight: 500;
+    margin-bottom: 5px;
 }
 
-select, input {
+/* Input field styling */
+input[type="number"], input[readonly] {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #333;
-    border-radius: 10px;
-    font-size: 16px;
-    background-color: #222;
-    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
     outline: none;
-    transition: border 0.3s ease;
-}
-
-select:focus, input:focus {
-    border: 1px solid #ffbf00;
-}
-
-input[readonly] {
     background-color: #333;
-    cursor: not-allowed;
+    color: #fff;
+    font-size: 16px;
 }
 
-#inputAmount {
-    margin-bottom: 10px;
+/* Select dropdown styling */
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
 }
 
-.exchange-icon {
-    text-align: center;
-    font-size: 30px;
-    margin: 20px 0;
-    color: #ffbf00;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.exchange-icon:hover {
-    transform: rotate(180deg);
-}
-
+/* Exchange rate and output styling */
 #exchangeRate, #thbRate {
     font-size: 14px;
-    color: #ffbf00;
-    margin-top: 5px;
-    text-align: center;
+    color: #ccc;
+    margin-top: 10px;
 }
 
-button {
-    padding: 12px 20px;
-    background-color: #ffbf00;
-    border: none;
-    border-radius: 8px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #ff9900;
-}
-
-@media screen and (max-width: 768px) {
+/* Responsive behavior */
+@media (max-width: 480px) {
     .calculator-container {
         padding: 20px;
-        width: 90%;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .exchange-icon {
-        font-size: 24px;
     }
 
-    button {
-        padding: 10px;
+    h2 {
+        font-size: 20px;
+    }
+
+    input, select {
+        font-size: 14px;
+        padding: 8px;
     }
 }
