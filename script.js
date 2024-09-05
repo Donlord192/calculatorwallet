@@ -44,12 +44,12 @@ function calculateTHB() {
         result = amount / finalRate;  // Рассчитываем сумму в THB
         document.getElementById('exchangeRate').innerText = `1 THB = ${finalRate.toFixed(2)} RUB`;
     } else if (currency === 'USDT') {
-        const usdtToThbRateWithMarkup = usdtToThbRate * (1 + markup);  // Прибавляем процент для улучшения курса
-        result = amount * usdtToThbRateWithMarkup;  // Рассчитываем сумму в THB
-        document.getElementById('exchangeRate').innerText = `1 USDT = ${usdtToThbRateWithMarkup.toFixed(2)} THB`;
+        finalRate = usdtToThbRate * (1 + markup);  // Прибавляем процент для улучшения курса
+        result = amount * finalRate;  // Рассчитываем сумму в THB
+        document.getElementById('exchangeRate').innerText = `1 USDT = ${finalRate.toFixed(2)} THB`;
     }
 
     // Отображаем итоговую сумму
     document.getElementById('outputAmount').value = result.toFixed(2);
-    document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} RUB`;
+    document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} RUB/USDT`;
 }
