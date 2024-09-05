@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUB-THB & USDT-THB Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="currency-block">
+            <h3>Отдаю</h3>
+            <select id="currencySelect" onchange="calculateTHB()">
+                <option value="RUB">RUB</option>
+                <option value="USDT">USDT</option>
+            </select>
+            <input type="number" id="inputAmount" placeholder="Введите сумму" oninput="calculateTHB()">
+            <p id="exchangeRate"></p>
+        </div>
+        
+        <div class="exchange-icon">⇄</div>
+
+        <div class="currency-block">
+            <h3>Получаю</h3>
+            <input type="text" id="outputAmount" readonly>
+            <p id="thbRate"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
