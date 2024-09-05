@@ -40,11 +40,11 @@ function calculateTHB() {
     // Рассчитываем сумму и итоговый курс с учетом накрутки
     if (currency === 'RUB') {
         const rubToThbRate = 2.85;  // Примерный курс RUB -> THB (базовый)
-        finalRate = rubToThbRate * (1 + markup);  // Прибавляем процент для улучшения курса при увеличении суммы
+        finalRate = rubToThbRate * (1 - markup);  // Уменьшаем курс, улучшая его для клиента
         result = amount / finalRate;  // Рассчитываем сумму в THB
         document.getElementById('exchangeRate').innerText = `1 THB = ${finalRate.toFixed(2)} RUB`;
     } else if (currency === 'USDT') {
-        finalRate = usdtToThbRate * (1 + markup);  // Прибавляем процент для улучшения курса
+        finalRate = usdtToThbRate * (1 - markup);  // Уменьшаем курс для USDT
         result = amount * finalRate;  // Рассчитываем сумму в THB
         document.getElementById('exchangeRate').innerText = `1 USDT = ${finalRate.toFixed(2)} THB`;
     }
