@@ -1,16 +1,10 @@
 let rubToUsdRate = 0.012;  // Примерный курс RUB -> USDT
 let usdtToThbRate = 36.5;  // Примерный курс USDT -> THB
 
-// Функция для обновления данных
-async function fetchRates() {
-    rubToUsdRate = 0.012;  // Реальный курс RUB-USDT
-    usdtToThbRate = 36.5;  // Реальный курс USDT-THB
-}
-
-// Функция для получения процента накрутки в зависимости от суммы
+// Функция для получения процентной накрутки на основе суммы
 function getMarkup(amount) {
     if (amount >= 1000 && amount < 10000) {
-        return 0.05;
+        return 0.05;  // 5% накрутка
     } else if (amount >= 10000 && amount < 20000) {
         return 0.04;
     } else if (amount >= 20000 && amount < 30000) {
@@ -38,21 +32,24 @@ function getMarkup(amount) {
 function calculateTHB() {
     const currency = document.getElementById('currencySelect').value;
     const amount = parseFloat(document.getElementById('inputAmount').value) || 0;
-    const markup = getMarkup(amount);
+    const markup = getMarkup(amount);  // Получаем процентную накрутку
 
     let result = 0;
+    let finalRate = 0;
 
-    // Рассчитываем сумму с накруткой
+    // Рассчитываем сумму и итоговый курс с учетом накрутки
     if (currency === 'RUB') {
-        const rubToThbRate = rubToUsdRate * usdtToThbRate;
-        result = (amount * rubToThbRate) * (1 - markup); // Учитываем накрутку
-        document.getElementById('exchangeRate').innerText = `1 RUB = ${rubToThbRate.toFixed(6)} THB`;
+        const rubToThbRate = 2.85;  // Примерный курс RUB -> THB (базовый)
+        finalRate = rubToThbRate * (1 - markup);  // Применяем процент накрутки
+        result = amount / finalRate;  // Рассчитываем сумму в THB
+        document.getElementById('exchangeRate').innerText = `1 THB = ${finalRate.toFixed(2)} RUB`;
     } else if (currency === 'USDT') {
-        result = amount * usdtToThbRate * (1 - markup);  // Учитываем накрутку
-        document.getElementById('exchangeRate').innerText = `1 USDT = ${usdtToThbRate.toFixed(6)} THB`;
+        const usdtToThbRateWithMarkup = usdtToThbRate * (1 - markup);  // Применяем процент накрутки
+        result = amount * usdtToThbRateWithMarkup;  // Рассчитываем сумму в THB
+        document.getElementById('exchangeRate').innerText = `1 USDT = ${usdtToThbRateWithMarkup.toFixed(2)} THB`;
     }
 
     // Отображаем итоговую сумму
     document.getElementById('outputAmount').value = result.toFixed(2);
-    document.getElementById('thbRate').innerText = `Текущий курс: ${usdtToThbRate.toFixed(2)} THB за USDT`;
+    document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} RUB`;
 }
