@@ -1,5 +1,25 @@
-let rubToUsdRate = 0.012;  // Примерный курс RUB -> USDT
-let usdtToThbRate = 36.5;  // Примерный курс USDT -> THB
+// URL для API для получения курсов
+const apiUrl = 'https://api.exchangerate-api.com/v4/latest/USD';
+
+// Функция для получения актуальных курсов
+async function fetchRates() {
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        // Предполагаем, что API возвращает курсы по USD
+        return {
+            usdToRubRate: data.rates.RUB,  // Курс USD -> RUB
+            usdToThbRate: data.rates.THB // Курс USD -> THB
+        };
+    } catch (error) {
+        console.error('Ошибка при получении курсов:', error);
+        return {
+            usdToRubRate: 75,  // Значения по умолчанию
+            usdToThbRate: 36.5
+        };
+    }
+}
 
 // Функция для получения процентной накрутки на основе суммы
 function getMarkup(amount) {
@@ -29,9 +49,10 @@ function getMarkup(amount) {
 }
 
 // Основная функция для расчета суммы
-function calculateTHB() {
+async function calculateTHB() {
     const currency = document.getElementById('currencySelect').value;
     const amount = parseFloat(document.getElementById('inputAmount').value) || 0;
+    const { usdToRubRate, usdToThbRate } = await fetchRates();  // Получаем актуальные курсы
     const markup = getMarkup(amount);  // Получаем процентную накрутку
 
     let result = 0;
@@ -39,17 +60,16 @@ function calculateTHB() {
 
     // Рассчитываем сумму и итоговый курс с учетом накрутки
     if (currency === 'RUB') {
-        const rubToThbRate = 2.85;  // Примерный курс RUB -> THB (базовый)
+        const rubToThbRate = usdToThbRate / usdToRubRate;  // Переводим курс RUB -> THB
         finalRate = rubToThbRate * (1 - markup);  // Уменьшаем курс, улучшая его для клиента
         result = amount / finalRate;  // Рассчитываем сумму в THB
-        document.getElementById('exchangeRate').innerText = `1 THB = ${finalRate.toFixed(2)} RUB`;
+        document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} RUB`;
     } else if (currency === 'USDT') {
-        finalRate = usdtToThbRate * (1 - markup);  // Уменьшаем курс для USDT
+        finalRate = usdToThbRate * (1 - markup);  // Уменьшаем курс для USDT
         result = amount * finalRate;  // Рассчитываем сумму в THB
-        document.getElementById('exchangeRate').innerText = `1 USDT = ${finalRate.toFixed(2)} THB`;
+        document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} USDT`;
     }
 
     // Отображаем итоговую сумму
     document.getElementById('outputAmount').value = result.toFixed(2);
-    document.getElementById('thbRate').innerText = `Текущий курс: 1 THB = ${finalRate.toFixed(2)} RUB/USDT`;
 }
